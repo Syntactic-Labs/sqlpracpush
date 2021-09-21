@@ -2,4 +2,4 @@ select concat(lastname, ' ', firstname) 'name', isnull(description, 'undecided')
 	from student s
 	left join major m
 		on m.id = s.MajorId
-			order by Lastname
+			order by Lastname;

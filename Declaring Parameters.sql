@@ -8,4 +8,5 @@ select *
 
 select *
 	from Student
-		where GPA <= @lowergpa;
+		where GPA <= @lowergpa
+			order by GPA asc;
