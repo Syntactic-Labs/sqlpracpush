@@ -36,16 +36,16 @@ CREATE TABLE Vendors(
 	City varchar(30) not null,
 	State varchar(2) not null,
 	Zip varchar(5) not null,
-	Phone varchar(12) not null,
-	Email varchar(255) not null,
+	Phone varchar(12) null,
+	Email varchar(255) null,
 );
-go
+
 Insert into Vendors
 	(Code, Name, Address, City, State, Zip, Phone, Email)
 		Values
-			('AMZ', 'Amazon', '469 Jeff st.', 'Manhatten', 'NY', 10001, 9171111111),
-			('Micro', 'Microsoft', '4445 Lake Forest Dr # 100', 'Blueash', 'OH', 45242, 5130000000),
-			('IBM', 'International Business Machines', '1 Orchard Rd', 'Armonk', 'NY', 10504, 9172222222)
+			('AMZ', 'Amazon', '469 Jeff st.', 'Manhatten', 'NY', 10001, 9171111111,'Amazon@gmail.com'),
+			('Micro', 'Microsoft', '4445 Lake Forest Dr # 100', 'Blueash', 'OH', 45242, 5130000000,'Microsoft@gmail.com'),
+			('IBM', 'InternationalBusinessMachines', '1 Orchard Rd', 'Armonk', 'NY', 10504, 9172222222,'IBM@gmail.com')
 ;
 go
 CREATE TABLE Products(
@@ -55,21 +55,19 @@ CREATE TABLE Products(
 	Price decimal(9,2) not null default 0,
 	Unit varchar(30) not null default 'Each',
 	PhotoPath varchar(255) null,
-	VendorsId int not null
-					foreign key references Vendors(Id)
-	
+	VendorsId int not null foreign key references Vendors(Id)	
 );
 go
 INSERT into Products
-	(PartNbr,Name,Price)
+	(PartNbr,Name,Price, VendorsId)
 		VALUES
-			('n5j4k32', 'Iphone', 856.99),
-			('9f842', 'Crackers', 12.87),
-			('9sfwa', 'Peanutbutter', 6.62),
-			('aw394', 'DoggyBall', 22.34),
-			('w98rau', 'Waffles', 9.99),
-			('sife75', 'Speedo', 2.99),
-			('aw894', 'HondaCivic', 27895.67)
+			('n5j4k32', 'Iphone', 856.99, (SELECT Id From Vendors where Code = 'Micro')),
+			('9f842', 'Crackers', 12.87, (SELECT Id From Vendors where Code = 'AMZ')),
+			('9sfwa', 'Peanutbutter', 6.62, (SELECT Id From Vendors where Code = 'AMZ')),
+			('aw394', 'DoggyBall', 22.34, (SELECT Id From Vendors where Code = 'AMZ')),
+			('w98rau', 'Waffles', 9.99, (SELECT Id From Vendors where Code = 'AMZ')),
+			('sife75', 'Speedo', 2.99, (SELECT Id From Vendors where Code = 'AMZ')),
+			('aw894', 'HondaCivic', 27895.67, (SELECT Id From Vendors where Code = 'IBM'))
 ;
 go
 CREATE TABLE Requests(
@@ -80,8 +78,7 @@ CREATE TABLE Requests(
 	DeliveryMode varchar(20) not null default 'Pickup',
 	Status varchar(10) not null default 'NEW',
 	Total decimal(11,2) not null default 0,
-	UserId int not null 
-				foreign key references Users(Id)
+	UserId int not null foreign key references Users(Id)
 );
 go
 CREATE TABLE Requestlines(
