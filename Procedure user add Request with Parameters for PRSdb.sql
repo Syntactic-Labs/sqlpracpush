@@ -27,7 +27,7 @@ AS Begin
 		Return -4;
 	End  --End of Parameter check
 	Declare @ProductId int;
-	Select @ProductId = Id from Products where Description = @ProductId
+	Select @ProductId = Id from Products where Description = @ProductName
 	--Insert
 	Insert Requestlines (RequestId, ProductId, Quantity)
 		Values (@RequestId, @ProductId, @Quantity);
@@ -35,4 +35,4 @@ AS Begin
 	Return 0;
 End 
 go                             --Reference your Data to fill. :D
-exec AddRequestLine @requestid = ?, @productname = ?, @Quantity = ?
+exec AddRequestLine @requestid = 3, @productname = '32 GB USB', @Quantity = 2

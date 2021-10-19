@@ -21,11 +21,9 @@ go
 INSERT into Users
 	(Username, Password, Firstname, Lastname, Phone, Email, IsReviewer, IsAdmin)
 		VALUES
-			('SneakyPete123', 'prsdb', 'Todd', 'Fergles', 5131111111, 'SneakyPete123@gmail.com', 1, 1), /*admin & review*/
-			('DragonSlayer123', 'prsdb', 'Nathan', 'Dougly', 5132222222, 'DragonSlayer123@gmail.com', 0, 1), /*admin*/
-			('LoveDisney123', 'prsdb', 'Garret', 'Funk', 5133333333, 'Lovedisney123@gmail.com', 1, 0), /*review*/
-			('RolexStyle123', 'prsdb', 'Ashley', 'Manker', 5134444444, 'RolexStyle123@gmail.com', 0, 0),
-			('BobsEmail123', 'prsdb', 'Bob', 'Bobber', 5135555555, 'BobsEmail123@gmail.com', 0, 0)
+			('FredFredders', 'fred', 'Fred', 'Fredders', 123-123-1234, 'FredFredders@gmail.com', 1, 1), /*admin & review*/
+			('ScottScotters', 'scott', 'Scott', 'Scotters', 123-123-1234, 'ScottScotters@gmail.com', 1, 0), /*admin*/
+			('ToddTodders', 'todd', 'Todd', 'Todders', 123-123-1234, 'ToddTodders@gmail.com', 0, 0) /*review*/
 ; 
 go
 CREATE TABLE Vendors(
@@ -43,9 +41,10 @@ go
 Insert into Vendors
 	(Code, Name, Address, City, State, Zip, Phone, Email)
 		Values
-			('AMZ', 'Amazon', '469 Jeff st.', 'Manhatten', 'NY', 10001, 9171111111,'Amazon@gmail.com'),
-			('Micro', 'Microsoft', '4445 Lake Forest Dr # 100', 'Blueash', 'OH', 45242, 5130000000,'Microsoft@gmail.com'),
-			('IBM', 'InternationalBusinessMachines', '1 Orchard Rd', 'Armonk', 'NY', 10504, 9172222222,'IBM@gmail.com')
+			('Dell', 'Dell', '1 Dell Way', 'Round Rock', 'TX', 78682, 877-717-3355,'Dell@gmail.com'),
+			('Uline', 'Uline', '12575 Uline Drive', 'Pleasant Prairie', 'WI', 53158, 800-295-5510,'Uline@gmail.com'),
+			('Micro', 'Micro Center', '11755 Mosteller Rd', 'Sharonville', 'OH', 45241, 513-782-8500, 'MicroCenter@gmail.com'),
+			('Cost', 'Costco', '9691 Waterstone Blvd', 'Cincinnati', 'OH', 45249, 513-774-0024, 'Costco@gmail.com')
 ; 
 go
 CREATE TABLE Products(
@@ -61,13 +60,21 @@ go
 INSERT into Products
 	(PartNbr,Description,Price, VendorsId)
 		VALUES
-			('n5j4k32', 'Iphone', 856.99, (SELECT Id From Vendors where Code = 'Micro')),
-			('9f842', 'Crackers', 12.87, (SELECT Id From Vendors where Code = 'AMZ')),
-			('9sfwa', 'Peanutbutter', 6.62, (SELECT Id From Vendors where Code = 'AMZ')),
-			('aw394', 'DoggyBall', 22.34, (SELECT Id From Vendors where Code = 'AMZ')),
-			('w98rau', 'Waffles', 9.99, (SELECT Id From Vendors where Code = 'AMZ')),
-			('sife75', 'Speedo', 2.99, (SELECT Id From Vendors where Code = 'AMZ')),
-			('aw894', 'HondaCivic', 27895.67, (SELECT Id From Vendors where Code = 'IBM'))
+			('DL14LAT', 'Laptop 14', 650.00, (SELECT Id From Vendors where Code = 'Dell')),
+			('DL15LAT', 'Laptop 15', 750.00, (SELECT Id From Vendors where Code = 'Dell')),
+			('DM24OLED', 'Monitor 24', 320.00, (SELECT Id From Vendors where Code = 'Dell')),
+			('UP12', 'Pencils', 3.99, (SELECT Id From Vendors where Code = 'Uline')),
+			('UDO', 'Desk Organizer', 12.50, (SELECT Id From Vendors where Code = 'Uline')),
+			('UNP', 'Note Pad', 0.99, (SELECT Id From Vendors where Code = 'Uline')),
+			('UBP12', 'Black Pens', 4.99, (SELECT Id From Vendors where Code = 'Uline')),
+			('MMP', 'Mouse Pad', 12.99, (SELECT Id From Vendors where Code = 'Micro')),
+			('MMO', 'Mouse', 12.99, (SELECT Id From Vendors where Code = 'Micro')),
+			('MUSB32', '32 GB USB', 9.99, (SELECT Id From Vendors where Code = 'Micro')),
+			('MUSB64', '64 GB USB', 27.99, (SELECT Id From Vendors where Code = 'Micro')),
+			('CSC', 'Chips', 0.99, (SELECT Id From Vendors where Code = 'Cost')),
+			('CSA', 'Apple', 0.50, (SELECT Id From Vendors where Code = 'Cost')),
+			('CSB', 'Beef Jerky', 12.99, (SELECT Id From Vendors where Code = 'Cost'))
+			
 ; 
 go
 CREATE TABLE Requests(
@@ -84,9 +91,11 @@ go
 Insert into Requests
 	(Description, Justification, Total, UserId)
 		Values
-			('Iphone','Always wanted one', 856.99, (select Id from Users where Username = 'SneakyPete123')),
-			('Peanutbutter', 'Hungry!!!', 6.62, (select Id from Users where Username = 'DragonSlayer123')),
-			('DoggyBall', 'Bored', 22.34, (select Id from Users where Username = 'LoveDisney123'))
+			('Desk Supplies','Productivity', 856.99, (select Id from Users where Username = 'FredFredders')),
+			('Snacks', 'Hungry', 6.62, (select Id from Users where Username = 'ScottScotters')),
+			('Storage', 'Current Project', 22.34, (select Id from Users where Username = 'ToddTodders')),
+			('Pens and Pencils', 'Need to take notes', 22.34, (select Id from Users where Username = 'ScottScotters')),
+			('Some Pens and Pencils', 'For my hellokitty note pad', 22.34, (select Id from Users where Username = 'FredFredders'))
 ; 
 go
 CREATE TABLE Requestlines(
@@ -100,8 +109,15 @@ go
 Insert into Requestlines
 	(Quantity, RequestId, ProductId)
 		Values
-			(1,(select Id from Requests where Description = 'Iphone'),(select Id from Products where PartNbr = 'n5j4k32')),
-			(2,(select Id from Requests where Description = 'Peanutbutter'),(select Id from Products where PartNbr = '9sfwa')),
-			(1,(select Id from Requests where Description = 'DoggyBall'),(select Id from Products where PartNbr = 'aw394'))
+			(3,(select Id from Requests where Description = 'Desk Supplies'),(select Id from Products where PartNbr = 'DL15LAT')),
+			(10,(select Id from Requests where Description = 'Snacks'),(select Id from Products where PartNbr = 'CSC')),
+			(1,(select Id from Requests where Description = 'Storage'),(select Id from Products where PartNbr = 'MUSB64')),
+			(2,(select Id from Requests where Description = 'Pens and Pencils'),(select Id from Products where PartNbr = 'UP12')),
+			(2,(select Id from Requests where Description = 'Pens and Pencils'),(select Id from Products where PartNbr = 'UBP12')),
+			(2,(select Id from Requests where Description = 'Some Pens and Pencils'),(select Id from Products where PartNbr = 'UP12')),
+			(1,(select Id from Requests where Description = 'Some Pens and Pencils'),(select Id from Products where PartNbr = 'UBP12')),
+			(1,(select Id from Requests where Description = 'Desk Supplies'),(select Id from Products where PartNbr = 'DM24OLED')),
+			(1,(select Id from Requests where Description = 'Desk Supplies'),(select Id from Products where PartNbr = 'MMP')),
+			(1,(select Id from Requests where Description = 'Desk Supplies'),(select Id from Products where PartNbr = 'MMO'))
 ; 
 go
