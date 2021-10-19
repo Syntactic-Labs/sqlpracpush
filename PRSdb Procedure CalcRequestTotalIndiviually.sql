@@ -1,7 +1,7 @@
---Createing a procedure for PRSdb
+--Createing a procedure for PRSdb To Calculate the Request Total
 
-CREATE or ALTER Procedure CalculateRequestTotal
-	@RequestId int = null
+CREATE or ALTER Procedure CalculateRequestTotalIndividually
+	@RequestId int = 1
 AS
 BEGIN                  --Data Check/Filter
 	--Check for missing RequestId
@@ -26,9 +26,12 @@ BEGIN                  --Data Check/Filter
 		join Products p
 			on p.Id = rl.ProductId
 		where r.Id = @RequestId;
+	Update Requests Set
+		Total = @Total
+		where Id = @RequestId;
 END
 GO
 Declare @rc int;
-EXEC @rc CalculateRequestTotal @RequestId = 1;
+EXEC CalculateRequestTotalIndividually
 Print @rc
 GO

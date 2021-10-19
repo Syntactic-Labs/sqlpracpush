@@ -91,11 +91,11 @@ go
 Insert into Requests
 	(Description, Justification, Total, UserId)
 		Values
-			('Desk Supplies','Productivity', 856.99, (select Id from Users where Username = 'FredFredders')),
-			('Snacks', 'Hungry', 6.62, (select Id from Users where Username = 'ScottScotters')),
-			('Storage', 'Current Project', 22.34, (select Id from Users where Username = 'ToddTodders')),
-			('Pens and Pencils', 'Need to take notes', 22.34, (select Id from Users where Username = 'ScottScotters')),
-			('Some Pens and Pencils', 'For my hellokitty note pad', 22.34, (select Id from Users where Username = 'FredFredders'))
+			('Desk Supplies','Productivity', 0.0, (select Id from Users where Username = 'FredFredders')),
+			('Snacks', 'Hungry', 0.0, (select Id from Users where Username = 'ScottScotters')),
+			('Storage', 'Current Project', 0.0, (select Id from Users where Username = 'ToddTodders')),
+			('Pens and Pencils', 'Need to take notes', 0.0, (select Id from Users where Username = 'ScottScotters')),
+			('Some Pens and Pencils', 'For my hellokitty note pad', 0.0, (select Id from Users where Username = 'FredFredders'))
 ; 
 go
 CREATE TABLE Requestlines(
