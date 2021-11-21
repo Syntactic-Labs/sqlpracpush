@@ -1,10 +1,10 @@
 use master;
 go
-drop database if exists PRSdb;
+drop database if exists DB_147202_prsdb;
 go
-create database PRSdb;
+create database DB_147202_prsdb;
 go
-use PRSdb;
+use DB_147202_prsdb;
 go
 CREATE TABLE Users(
 	Id int not null primary key identity(1,1),
@@ -58,22 +58,22 @@ CREATE TABLE Products(
 ); 
 go
 INSERT into Products
-	(PartNbr,Description,Price, VendorsId)
+	(PartNbr, Name, Price, Unit, VendorId)
 		VALUES
-			('DL14LAT', 'Laptop 14', 650.00, (SELECT Id From Vendors where Code = 'Dell')),
-			('DL15LAT', 'Laptop 15', 750.00, (SELECT Id From Vendors where Code = 'Dell')),
-			('DM24OLED', 'Monitor 24', 320.00, (SELECT Id From Vendors where Code = 'Dell')),
-			('UP12', 'Pencils', 3.99, (SELECT Id From Vendors where Code = 'Uline')),
-			('UDO', 'Desk Organizer', 12.50, (SELECT Id From Vendors where Code = 'Uline')),
-			('UNP', 'Note Pad', 0.99, (SELECT Id From Vendors where Code = 'Uline')),
-			('UBP12', 'Black Pens', 4.99, (SELECT Id From Vendors where Code = 'Uline')),
-			('MMP', 'Mouse Pad', 12.99, (SELECT Id From Vendors where Code = 'Micro')),
-			('MMO', 'Mouse', 12.99, (SELECT Id From Vendors where Code = 'Micro')),
-			('MUSB32', '32 GB USB', 9.99, (SELECT Id From Vendors where Code = 'Micro')),
-			('MUSB64', '64 GB USB', 27.99, (SELECT Id From Vendors where Code = 'Micro')),
-			('CSC', 'Chips', 0.99, (SELECT Id From Vendors where Code = 'Cost')),
-			('CSA', 'Apple', 0.50, (SELECT Id From Vendors where Code = 'Cost')),
-			('CSB', 'Beef Jerky', 12.99, (SELECT Id From Vendors where Code = 'Cost'))
+			('DL14LAT', 'Laptop 14', 650.00, 'each', (SELECT Id From Vendors where Code = 'Dell')),
+			('DL15LAT', 'Laptop 15', 750.00, 'each', (SELECT Id From Vendors where Code = 'Dell')),
+			('DM24OLED', 'Monitor 24', 320.00, 'each', (SELECT Id From Vendors where Code = 'Dell')),
+			('UP12', 'Pencils', 3.99, 'each', (SELECT Id From Vendors where Code = 'Uline')),
+			('UDO', 'Desk Organizer', 12.50, 'each', (SELECT Id From Vendors where Code = 'Uline')),
+			('UNP', 'Note Pad', 0.99, 'each', (SELECT Id From Vendors where Code = 'Uline')),
+			('UBP12', 'Black Pens', 4.99, 'each', (SELECT Id From Vendors where Code = 'Uline')),
+			('MMP', 'Mouse Pad', 12.99, 'each', (SELECT Id From Vendors where Code = 'Micro')),
+			('MMO', 'Mouse', 12.99, 'each', (SELECT Id From Vendors where Code = 'Micro')),
+			('MUSB32', '32 GB USB', 9.99, 'each', (SELECT Id From Vendors where Code = 'Micro')),
+			('MUSB64', '64 GB USB', 27.99, 'each', (SELECT Id From Vendors where Code = 'Micro')),
+			('CSC', 'Chips', 0.99, 'each', (SELECT Id From Vendors where Code = 'Cost')),
+			('CSA', 'Apple', 0.50, 'each', (SELECT Id From Vendors where Code = 'Cost')),
+			('CSB', 'Beef Jerky', 12.99, 'each', (SELECT Id From Vendors where Code = 'Cost'))
 			
 ; 
 go
